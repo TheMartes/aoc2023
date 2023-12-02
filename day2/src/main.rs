@@ -32,21 +32,25 @@ fn main() {
                 let count = count_raw.parse::<i32>().unwrap();
 
                 match color {
-                    "red" => if count > 12 { game_possible = false },
-                    "green" => if count > 13 { game_possible = false },
-                    "blue" => if count > 14 { game_possible = false },
+                    "red" => {
+                        if count > 12 { game_possible = false }
+                        if count > ho.red {
+                            ho.red = count
+                        }
+                    },
+                    "green" => {
+                        if count > 13 { game_possible = false }
+                        if count > ho.green {
+                            ho.green = count
+                        }
+                    },
+                    "blue" => {
+                        if count > 14 { game_possible = false }
+                        if count > ho.blue {
+                            ho.blue = count
+                        }
+                    },
                     _ => println!("Can't match cube combination")
-                }
-
-                if color == "red" && count > ho.red {
-                    ho.red = count
-                }
-
-                if color == "blue" && count > ho.blue {
-                    ho.blue = count
-                }
-                if color == "green" && count > ho.green {
-                    ho.green = count
                 }
             }
         }
@@ -60,7 +64,6 @@ fn main() {
 
     println!("result part one: {}", result);
     println!("result part two: {}", power_sum);
-
 }
 
 fn lines_from_file(filename: impl AsRef<Path>) -> Vec<String> {
